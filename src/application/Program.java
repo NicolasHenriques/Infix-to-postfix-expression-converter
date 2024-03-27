@@ -12,10 +12,27 @@ import java.util.Scanner;
 import util.Stack;
 
 public class Program {
+	
+	//method that prints the menu to the user
+	public static void showMenu() {
+		System.out.println("""
+				===================== Menu =====================
+				1. Write the desired infix arithmetic expression
+				2. Enter the numeric values for each variable
+				3. Conversion from infix to postfix expression
+				4. Evaluate the expression
+				5. Exit
+				""");
+	}
+	
+	
 	//method that converts from infix to postfix
 	public static String convertInfixToPostfix(String ie) {
 		//creating stack object
 		Stack postfix_expression = new Stack();
+		
+		//creating String variable that will be returned
+		String postfix;
 		
 		for(int i=0;i<ie.length();i++) {
 			
