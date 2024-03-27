@@ -48,10 +48,35 @@ public class Program {
 		
 		//declaring variables
 		String infix_expression;
+		int opt;
 		
 		//reading user input
 		infix_expression = sc.nextLine();
+
 		
+		while(true){
+			showMenu();
+			System.out.println("Type your choice: ");
+			opt = sc.nextInt();
+			if(opt == 1){
+
+			}
+			else if(opt == 2){
+
+			}
+			else if(opt == 3){
+
+			}
+			else if(opt == 4){
+
+			}
+			else if(opt == 5){
+
+			}
+			else{
+
+			}
+		}
 		
 		
 	}
