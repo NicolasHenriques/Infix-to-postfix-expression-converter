@@ -4,9 +4,11 @@
 // - Nicolas Henriques de Almeida  | RA: 10418357
 //References:
 // - https://profkishimoto.github.io/edi03d-2024-1/atividades/n1/EDI-2024.1%20-%20Apl1.pdf
+// - https://www.calcont.in/Calculator/Postfix_calculator/
 
 package application;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import util.Stack;
@@ -32,13 +34,13 @@ public class Program {
 		Stack postfix_expression = new Stack();
 		
 		//creating String variable that will be returned
-		String postfix;
+		String postfix = "";
 		
 		for(int i=0;i<ie.length();i++) {
 			
 		}
 		
-		return "";
+		return postfix;
 	}
 	
 	//main method
@@ -48,36 +50,46 @@ public class Program {
 		
 		//declaring variables
 		String infix_expression;
-		int opt;
+		int opt = 0;
 		
-		//reading user input
-		infix_expression = sc.nextLine();
-
-		
-		while(true){
+		//loop to keep the menu running
+		while(opt != 5){
 			showMenu();
+			
 			System.out.println("Type your choice: ");
-			opt = sc.nextInt();
-			if(opt == 1){
-
+			try {
+				opt = sc.nextInt();
+			} catch(InputMismatchException e) {
+				opt = 0;
+				sc.nextLine();
 			}
-			else if(opt == 2){
-
-			}
-			else if(opt == 3){
-
-			}
-			else if(opt == 4){
-
-			}
-			else if(opt == 5){
-
-			}
-			else{
-
-			}
+			
+			switch(opt) {
+				//read infix arithmetic expression
+				case 1:
+					break;
+					
+				//read values for the variables in the expression
+				case 2:
+					break;
+					
+				//converts the infix expression to a postfix expression
+				case 3:
+					break;
+					
+				//evaluate and give the result to the expression
+				case 4:
+					break;
+					
+				//exit
+				case 5:
+					break;
+					
+				//default option that checks for invalid numbers
+				default:
+					System.out.println("Enter a valid option!");
+					break;
+			}	
 		}
-		
-		
 	}
 }
