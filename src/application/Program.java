@@ -56,7 +56,7 @@ public class Program {
 		while(opt != 5){
 			showMenu();
 			
-			System.out.println("Type your choice: ");
+			System.out.print("Type your choice: ");
 			try {
 				opt = sc.nextInt();
 			} catch(InputMismatchException e) {
