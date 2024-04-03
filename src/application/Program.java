@@ -29,66 +29,67 @@ public class Program {
 	
 	
 	//method that converts from infix to postfix
-	public static String convertInfixToPostfix(String ie) {
-		//creating stack object
-		Stack postfix_expression = new Stack();
-		
-		//creating String variable that will be returned
-		String postfix = "";
-		//creating variable to store the priority of an operand
-		int prioridade_anterior = 0;
-		
-		for(int i=0;i<ie.length();i++) {
-			if(isAlphanumeric(ie.charAt(i))){
-				System.out.print(ie.charAt(i));
-			}
-			else if(isOperator(ie.charAt(i))) {
-				prioridade_anterior = prioridadeCheck(postfix_expression.top()); //if an operand is found. Check if its priority is less/equal than the previous
-				if(prioridade_anterior >= prioridadeCheck(ie.charAt(i))){ //if it is, pop the last one from the stack and push the new one. If it isn't, just add the new one to the stack
-					System.out.print(postfix_expression.pop());
-				}
-				postfix_expression.push(ie.charAt(i));
-			}
-			else if(ie.charAt(i) == '(') { //add ( to the stack
-				postfix_expression.push(ie.charAt(i));
-			}
-			else if(ie.charAt(i) == ')') { //if an ) is found, pop everything until you find a (
-				while(!postfix_expression.isEmpty() && postfix_expression.top() != '(') {
-					System.out.print(postfix_expression.pop());
-				}
-				postfix_expression.pop(); 
-			}
-		}
-		while(!postfix_expression.isEmpty()) { //pop the remaining elements of the stack
-			System.out.print(postfix_expression.pop());
-		}
-		System.out.print("\n");
-		return postfix;
-	}
+public static String convertInfixToPostfix(String ie) {
+  //creating stack object
+  Stack postfixExpression = new Stack();
 
-	
-	public static boolean isAlphanumeric(char check) { //check if the character is alphanumeric
-	    return (check >= 65 && check <= 90) ||
-	            (check >= 97 && check <= 122) ||
-	            (check >= 48 && check <= 57);
-	}
-	public static boolean isOperator(char check) { //check if the character is an operand
-		return check=='+'||check=='-'||check=='*'||check=='/'||check=='^';
-	}
-	public static int prioridadeCheck(char check) { //se the "priority level" of the character
-		switch (check) {
-		case '+':
-		case '-':
-			return 1;
-		case '*':
-		case '/':
-			return 2;
-		case '^':
-			return 3;
-		default:
-			return 0;
-		}
-	}
+  //creating String variable that will be returned
+  String postfix = "";
+  //creating variable to store the priority of an operand
+  int previousPriority = 0;
+
+  for(int i=0;i<ie.length();i++) {
+    if(isAlphanumeric(ie.charAt(i))){
+      System.out.print(ie.charAt(i));
+    }
+    else if(isOperator(ie.charAt(i))) {
+      previousPriority = priorityCheck(postfixExpression.top()); //if an operand is found. Check if its priority is less/equal than the previous
+      if(previousPriority >= priorityCheck(ie.charAt(i))){ //if it is, pop the last one from the stack and push the new one. If it isn't, just add the new one to the stack
+        System.out.print(postfixExpression.pop());
+      }
+      postfixExpression.push(ie.charAt(i));
+    }
+    else if(ie.charAt(i) == '(') { //add ( to the stack
+      postfixExpression.push(ie.charAt(i));
+    }
+    else if(ie.charAt(i) == ')') { //if an ) is found, pop everything until you find a (
+      while(!postfixExpression.isEmpty() && postfixExpression.top() != '(') {
+        System.out.print(postfixExpression.pop());
+      }
+       postfixExpression.pop(); 
+    }
+  }
+  while(!postfixExpression.isEmpty()) { //pop the remaining elements of the stack
+    System.out.print(postfixExpression.pop());
+  }
+  System.out.print("\n");
+  return postfix;
+}
+
+
+public static boolean isAlphanumeric(char check) { //check if the character is alphanumeric
+    return (check >= 65 && check <= 90) ||
+            (check >= 97 && check <= 122) ||
+            (check >= 48 && check <= 57);
+}
+public static boolean isOperator(char check) { //check if the character is an operand
+  return check=='+'||check=='-'||check=='*'||check=='/'||check=='^';
+}
+public static int priorityCheck(char check) { //se the "priority level" of the character
+  switch (check) {
+  case '+':
+  case '-':
+    return 1;
+  case '*':
+  case '/':
+    return 2;
+  case '^':
+    return 3;
+  default:
+    return 0;
+  }
+}
+
 	
 	//main method
 	public static void main(String[] args) {
@@ -96,7 +97,7 @@ public class Program {
 		Scanner sc = new Scanner(System.in);
 		
 		//declaring variables
-		String infix_expression;
+		String infixExpression;
 		int opt = 0;
 		
 		//loop to keep the menu running
