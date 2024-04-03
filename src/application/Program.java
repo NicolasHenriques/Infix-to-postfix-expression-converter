@@ -114,27 +114,27 @@ public class Program {
 			switch(opt) {
 				//read infix arithmetic expression
 				case 1:
-					convertInfixToPostfix("A*B+C"); [TODO]
+					convertInfixToPostfix("A*B+C"); //[TODO]
 					break;
 					
 				//read values for the variables in the expression
 				case 2:
-					[TODO]
+					//[TODO]
 					break;
 					
 				//converts the infix expression to a postfix expression
 				case 3:
-					[TODO]
+					//[TODO]
 					break;
 					
 				//evaluate and give the result to the expression
 				case 4:
-					[TODO]
+					//[TODO]
 					break;
 					
 				//exit
 				case 5:
-					[TODO]
+					//[TODO]
 					break;
 					
 				//default option that checks for invalid numbers
