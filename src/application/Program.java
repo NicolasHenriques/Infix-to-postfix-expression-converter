@@ -19,9 +19,9 @@ import java.util.Scanner;
 import util.Stack;
 
 public class Program {
-	//method that receives no parameter and has
+	//Method that receives no parameter and has
 	//no return. Only used to show the menu
-	//to the user.
+	//to the user
 	public static void showMenu() {
 		System.out.println("""
 				===================== Menu =====================
@@ -33,23 +33,23 @@ public class Program {
 				""");
 	}
 	
-	//method that receives a char and checks
+	//Method that receives a char and checks
 	//if it is an upper case letter.
-	//returns true if it is, returns false if it isn't
-	public static boolean isLetter(char check) { //check if the character is alphanumeric
+	//Returns true if it is, returns false if it isn't
+	public static boolean isLetter(char check) { //check if the character is a letter
 		return (check >= 65 && check <= 90);
 	}
 	
-	//method that receives a char and checks
+	//Method that receives a char and checks
 	//if it is an arithmetic operator.
-	//returns true if it is, returns false if it isn't
+	//Returns true if it is, returns false if it isn't
 	public static boolean isOperator(char check) { //check if the character is an operand
 		return check=='+'||check=='-'||check=='*'||check=='/'||check=='^';
 	}
 	
-	//method that receives a char as a parameter
+	//Method that receives a char as a parameter
 	//and checks it's priority.
-	//returns the corresponding priority as an int
+	//Returns the corresponding priority as an int
 	public static int priorityCheck(char check) { //see the "priority level" of the character
 		switch (check) {
 			case '+':
@@ -65,7 +65,9 @@ public class Program {
 		}
 	}
 	
-	//
+	//Method that receives a String containing an infix expresssion
+	//and an integer array to store which variables were used.
+	//Returns true if the expression has variables and false if not.
 	public static boolean checkVariables(String infixExpression, int variables[]) {
 		boolean hasVariables = false;
 		for(int i=0;i<infixExpression.length();i++) 
@@ -77,7 +79,9 @@ public class Program {
 		return hasVariables;
 	}
 	
-	//
+	//Method that receives a scanner object, a String containing the
+	//infix expression and an integer array to store the variables' values 
+	//as parameters. This method doesn't return anything
 	public static void readVariablesValues(Scanner sc, String infixExpression, int values[]) {
 		//creating an array to store what variables were used
 		int variables[] = new int[26];
@@ -100,7 +104,7 @@ public class Program {
 		}
 	}
 	
-	//method that receives an String containing an
+	//Method that receives an String containing an
 	//infix expression, converts it to a postfix expression
 	//and returns it in a String
 	public static String convertInfixToPostfix(String ie) {
@@ -141,7 +145,7 @@ public class Program {
 		return postfix;
 	}
 	
-	//method that receives a scanner object as a parameter,
+	//Method that receives a scanner object as a parameter,
 	//reads user input for the desired expression and 
 	//returns the infix arithmetic expression as a String
 	public static String writeExpression(Scanner sc) {
@@ -160,9 +164,9 @@ public class Program {
 		return exp;
 	}
 	
-	//method that receives a string as a parameter
-	//and checks if the expression in the string is valid
-	//returns true if the expression is valid and false if it isn't
+	//Method that receives a string as a parameter
+	//and checks if the expression in the string is valid.
+	//Returns true if the expression is valid and false if it isn't
 	public static boolean verifyInput(String expression){
 		Stack s = new Stack(64);
 		char currentChar;
@@ -195,7 +199,7 @@ public class Program {
 	}
 
 	
-	//main method
+	//Main method
 	public static void main(String[] args) {
 		//creating objects
 		Scanner sc = new Scanner(System.in);
