@@ -225,21 +225,24 @@ public class Program {
 	}
 	
 	//
-	public static float postfixResult(String infixExpression, int values[]) {
+	public static float postfixResult(String postfixExpression, int values[]) {
 		float result = 0;
 		FloatStack s = new FloatStack(8);
 		
 		float firstValue, secondValue;
 		
-		for(int i=0;i<infixExpression.length();i++) {
-			char currentChar = infixExpression.charAt(i);
-			if(isLetter(currentChar))
+		for(int i=0;i<postfixExpression.length();i++) {
+			char currentChar = postfixExpression.charAt(i);
+			if(isLetter(currentChar)) {
 				s.push((values[currentChar-65]));
-			else {
-				firstValue = s.pop();
+			}
+				
+			if(isOperator(currentChar)) {
 				secondValue = s.pop();
+				firstValue = s.pop();
 				char operator = currentChar;
 				float partialResult = calculateOperation(firstValue, secondValue, operator);
+				System.out.println(partialResult);
 				s.push(partialResult);
 			}
 		}
@@ -251,7 +254,7 @@ public class Program {
 	public static void postfixEvaluation(String infixExpression, int values[]) {
 		float result = 0;
 		result = postfixResult(infixExpression, values);
-		System.out.println("Resultado da expressao: " + result);
+		System.out.println("Expression result: " + result);
 	}
 
 	
