@@ -5,6 +5,8 @@
 //References:
 // - https://profkishimoto.github.io/edi03d-2024-1/atividades/n1/EDI-2024.1%20-%20Apl1.pdf
 // - https://www.calcont.in/Calculator/Postfix_calculator/
+// ASCII TABLE - https://www.ascii-code.com
+// - https://www.baeldung.com/java-check-string-contains-only-letters-numbers
 
 package application;
 
@@ -67,10 +69,9 @@ public static String convertInfixToPostfix(String ie) {
 }
 
 
-public static boolean isAlphanumeric(char check) { //check if the character is alphanumeric
+public static boolean isLetter(char check) { //check if the character is alphanumeric
     return (check >= 65 && check <= 90) ||
-            (check >= 97 && check <= 122) ||
-            (check >= 48 && check <= 57);
+	    (check >= 97 && check <= 122);
 }
 public static boolean isOperator(char check) { //check if the character is an operand
   return check=='+'||check=='-'||check=='*'||check=='/'||check=='^';
@@ -89,6 +90,52 @@ public static int priorityCheck(char check) { //se the "priority level" of the c
     return 0;
   }
 }
+	//Write the infix arithmetic expression
+	public static String writeExpression(Scanner sc) {
+		sc.nextLine();
+		String exp = "";
+		while(true) {
+			System.out.println("Type the expression: ");
+			exp = sc.nextLine();
+			boolean veriffy = verifyInput(exp);
+			if(!veriffy) {
+				System.out.println("Try again");
+				continue;
+			}
+			break;
+		}
+		return exp;
+	}
+	public static boolean verifyInput(String expression){
+		Stack s = new Stack(64);
+		char currentChar;
+		boolean controlVariable = false; //true - ultimo char foi uma letra // false - ultimo char foi um operador
+		for (int i = 0 ; i < expression.length() ; i++) {
+			currentChar = expression.charAt(i);
+			if (currentChar == '(') {
+                s.push(')'); 
+            }
+			else if (currentChar == ')'){
+                if (')' != s.pop()) {
+                	System.out.println("Parenthesis mismatch");
+                	return false; 
+                }
+              }
+			else if (isLetter(currentChar) && controlVariable == false) {
+				controlVariable = true;
+				continue;
+			}
+			else if (isOperator(currentChar) && controlVariable == true) {
+				controlVariable = false;
+				continue;
+			}
+			else {
+				System.out.println("Error - invalid order or character.");
+				return false;
+			}
+		}
+		return s.isEmpty();
+	}
 
 	
 	//main method
@@ -97,7 +144,7 @@ public static int priorityCheck(char check) { //se the "priority level" of the c
 		Scanner sc = new Scanner(System.in);
 		
 		//declaring variables
-		String infixExpression;
+		String infix_expression = "";
 		int opt = 0;
 		
 		//loop to keep the menu running
@@ -115,7 +162,7 @@ public static int priorityCheck(char check) { //se the "priority level" of the c
 			switch(opt) {
 				//read infix arithmetic expression
 				case 1:
-					convertInfixToPostfix("A*B+C"); //[TODO]
+					infix_expression = writeExpression(sc);
 					break;
 					
 				//read values for the variables in the expression
@@ -126,6 +173,7 @@ public static int priorityCheck(char check) { //se the "priority level" of the c
 				//converts the infix expression to a postfix expression
 				case 3:
 					//[TODO]
+					convertInfixToPostfix(infix_expression); //[TODO]
 					break;
 					
 				//evaluate and give the result to the expression
