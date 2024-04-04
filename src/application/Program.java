@@ -16,7 +16,9 @@ import java.util.Scanner;
 import util.Stack;
 
 public class Program {
-	//method that prints the menu to the user
+	//method that receives no parameter and has
+	//no return. Only used to show the menu
+	//to the user.
 	public static void showMenu() {
 		System.out.println("""
 				===================== Menu =====================
@@ -28,8 +30,9 @@ public class Program {
 				""");
 	}
 	
-	
-	//method that converts from infix to postfix
+	//method that receives an String containing an
+	//infix expression, converts it to a postfix expression
+	//and returns it in a String
 	public static String convertInfixToPostfix(String ie) {
 		//creating stack object
 		Stack postfixExpression = new Stack();
@@ -68,15 +71,23 @@ public class Program {
 		return postfix;
 	}
 
-
+	//method that receives a char and checks
+	//if it is an upper case letter.
+	//returns true if it is, returns false if it isn't
 	public static boolean isLetter(char check) { //check if the character is alphanumeric
 		return (check >= 65 && check <= 90);
 	}
 	
+	//method that receives a char and checks
+	//if it is an arithmetic operator.
+	//returns true if it is, returns false if it isn't
 	public static boolean isOperator(char check) { //check if the character is an operand
 		return check=='+'||check=='-'||check=='*'||check=='/'||check=='^';
 	}
 	
+	//method that receives a char as a parameter
+	//and checks it's priority.
+	//returns the corresponding priority as an int
 	public static int priorityCheck(char check) { //see the "priority level" of the character
 		switch (check) {
 			case '+':
@@ -92,15 +103,17 @@ public class Program {
 		}
 	}
 	
-	//Write the infix arithmetic expression
+	//method that receives a scanner object as a parameter,
+	//reads user input for the desired expression and 
+	//returns the infix arithmetic expression as a String
 	public static String writeExpression(Scanner sc) {
 		sc.nextLine();
 		String exp = "";
 		while(true) {
 			System.out.println("Type the expression: ");
 			exp = sc.nextLine();
-			boolean veriffy = verifyInput(exp);
-			if(!veriffy) {
+			boolean verify = verifyInput(exp);
+			if(!verify) {
 				System.out.println("Try again");
 				continue;
 			}
@@ -108,6 +121,10 @@ public class Program {
 		}
 		return exp;
 	}
+	
+	//method that receives a string as a parameter
+	//and checks if the expression in the string is valid
+	//returns true if the expression is valid and false if it isn't
 	public static boolean verifyInput(String expression){
 		Stack s = new Stack(64);
 		char currentChar;
@@ -147,6 +164,7 @@ public class Program {
 		
 		//declaring variables
 		String infix_expression = "";
+		String postfix_expression = "";
 		int opt = 0;
 		
 		//loop to keep the menu running
@@ -175,7 +193,7 @@ public class Program {
 				//converts the infix expression to a postfix expression
 				case 3:
 					//[TODO]
-					convertInfixToPostfix(infix_expression); //[TODO]
+					postfix_expression = convertInfixToPostfix(infix_expression); //[TODO]
 					break;
 					
 				//evaluate and give the result to the expression
