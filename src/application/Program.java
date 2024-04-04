@@ -8,6 +8,7 @@
 // - https://www.ascii-code.com
 // - https://www.baeldung.com/java-check-string-contains-only-letters-numbers
 // - https://www.w3docs.com/snippets/java/any-shortcut-to-initialize-all-array-elements-to-zero.html#:~:text=If%20you%20want%20to%20create,fill%20method.&text=This%20will%20create%20a%20new,of%20the%20array%20to%20zero.
+// - https://www.javatpoint.com/how-to-return-an-array-in-java
 
 package application;
 
@@ -30,21 +31,6 @@ public class Program {
 				4. Evaluate the expression
 				5. Exit
 				""");
-	}
-	
-	public static void checkVariables(String infixExpression, int variables[]) {
-		for(int i=0;i<infixExpression.length();i++) 
-			if(isLetter(infixExpression.charAt(i))) 
-				variables[infixExpression.charAt(i) - 65]++;
-	}
-	
-	//
-	public static void readVariablesValues(String infixExpression, int values[]) {
-		int variables[] = new int[26];
-		Arrays.fill(variables, 0);
-		checkVariables(infixExpression, variables);
-		for(int i=0;i<26;i++)
-			System.out.println(values[i] + " ");
 	}
 	
 	//method that receives a char and checks
@@ -76,6 +62,41 @@ public class Program {
 			    return 3;
 			default:
 			    return 0;
+		}
+	}
+	
+	//
+	public static boolean checkVariables(String infixExpression, int variables[]) {
+		boolean hasVariables = false;
+		for(int i=0;i<infixExpression.length();i++) 
+			if(isLetter(infixExpression.charAt(i))) {
+				variables[infixExpression.charAt(i) - 65] = 1;
+				hasVariables = true;
+			}
+		
+		return hasVariables;
+	}
+	
+	//
+	public static void readVariablesValues(Scanner sc, String infixExpression, int values[]) {
+		//creating an array to store what variables were used
+		int variables[] = new int[26];
+		Arrays.fill(variables, 0);
+		
+		boolean hasVariables = false;
+		hasVariables = checkVariables(infixExpression, variables);
+		
+		if(hasVariables) {
+			for(int i=0;i<26;i++) {
+				if(variables[i] != 0) {
+					System.out.print("Enter the value for " + (char)(i+65) + ": ");
+					//[TODO] handle type mismatch exception
+					values[i] = sc.nextInt();
+				}
+			}
+		}
+		else {
+			System.out.println("Your expression has no variables!");
 		}
 	}
 	
@@ -207,7 +228,7 @@ public class Program {
 					
 				//read values for the variables in the expression
 				case 2:
-					readVariablesValues(infixExpression, values);
+					readVariablesValues(sc, infixExpression, values);
 					break;
 					
 				//converts the infix expression to a postfix expression
