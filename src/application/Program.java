@@ -9,6 +9,7 @@
 // - https://www.baeldung.com/java-check-string-contains-only-letters-numbers
 // - https://www.w3docs.com/snippets/java/any-shortcut-to-initialize-all-array-elements-to-zero.html#:~:text=If%20you%20want%20to%20create,fill%20method.&text=This%20will%20create%20a%20new,of%20the%20array%20to%20zero.
 // - https://www.javatpoint.com/how-to-return-an-array-in-java
+// - https://www.geeksforgeeks.org/math-pow-method-in-java-with-example/
 
 package application;
 
@@ -17,7 +18,7 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import util.CharStack;
-import util.IntStack;
+import util.FloatStack;
 
 public class Program {
 	//Method that receives no parameter and has
@@ -199,24 +200,58 @@ public class Program {
 		return s.isEmpty();
 	}
 	
-	//
-	public static int postfixResult(String infixExpression, int values[]) {
-		int result = 0;
-		IntStack s = new IntStack(8);
+	public static float calculateOperation(float firstValue, float secondValue, char operator) {
+		float result = 0;
 		
-		for(int i=0;i<infixExpression.length();i++) {
-			char currentChar = infixExpression.charAt(i);
-			if(isLetter(currentChar))
-				s.push((values[currentChar-65]));
+		switch(operator) {
+			case '+':
+				result = firstValue + secondValue;
+				break;
+			case '-':
+				result = firstValue - secondValue;
+				break;
+			case '*':
+				result = firstValue * secondValue;
+				break;
+			case '/':
+				result = firstValue / secondValue;
+				break;
+			case '^':
+				result = (float) Math.pow(firstValue, secondValue);
+				break;
 		}
 		
 		return result;
 	}
 	
 	//
-	public static void postfixEvaluation(String infixExpression, int values[]) {
-		int result = 0;
+	public static float postfixResult(String infixExpression, int values[]) {
+		float result = 0;
+		FloatStack s = new FloatStack(8);
 		
+		float firstValue, secondValue;
+		
+		for(int i=0;i<infixExpression.length();i++) {
+			char currentChar = infixExpression.charAt(i);
+			if(isLetter(currentChar))
+				s.push((values[currentChar-65]));
+			else {
+				firstValue = s.pop();
+				secondValue = s.pop();
+				char operator = currentChar;
+				float partialResult = calculateOperation(firstValue, secondValue, operator);
+				s.push(partialResult);
+			}
+		}
+		
+		return s.pop();
+	}
+	
+	//
+	public static void postfixEvaluation(String infixExpression, int values[]) {
+		float result = 0;
+		result = postfixResult(infixExpression, values);
+		System.out.println("Resultado da expressao: " + result);
 	}
 
 	

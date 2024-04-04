@@ -1,36 +1,36 @@
 package util;
 
-public class IntStack {
+public class FloatStack {
 	//defining a constant for capacity
 	private final int STACK_CAPACITY = 256;
 	
 	//declaring variables
-	private int data[];
+	private float data[];
 	private int top;
 	
 	//constructors methods
-	public IntStack () {
-		data = new int[STACK_CAPACITY];
+	public FloatStack () {
+		data = new float[STACK_CAPACITY];
 		top = 0;
 	}
 	
-	public IntStack (int size) {
-		data = new int[size];
+	public FloatStack (int size) {
+		data = new float[size];
 		top = 0;
 	}
 	
 	//fundamental stack methods
-	public void push(int input) {
+	public void push(float input) {
 		if(!isFull()) {
 			data[top] = input;
 			top++;
 		}
 	}
 	
-	public int pop() {
+	public float pop() {
 		if(!isEmpty()) { 
 			top--;
-			int pop = data[top];
+			float pop = data[top];
 			data[top] = ' ';
 			
 			return pop;
@@ -41,7 +41,7 @@ public class IntStack {
 		}
 	}
 	
-	public int top() {
+	public float top() {
 		if(!isEmpty()) { 
 			return data[top-1];
 		}
