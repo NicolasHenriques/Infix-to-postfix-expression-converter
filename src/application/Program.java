@@ -7,9 +7,11 @@
 // - https://www.calcont.in/Calculator/Postfix_calculator/
 // - https://www.ascii-code.com
 // - https://www.baeldung.com/java-check-string-contains-only-letters-numbers
+// - https://www.w3docs.com/snippets/java/any-shortcut-to-initialize-all-array-elements-to-zero.html#:~:text=If%20you%20want%20to%20create,fill%20method.&text=This%20will%20create%20a%20new,of%20the%20array%20to%20zero.
 
 package application;
 
+import java.util.Arrays;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -28,6 +30,53 @@ public class Program {
 				4. Evaluate the expression
 				5. Exit
 				""");
+	}
+	
+	public static void checkVariables(String infixExpression, int variables[]) {
+		for(int i=0;i<infixExpression.length();i++) 
+			if(isLetter(infixExpression.charAt(i))) 
+				variables[infixExpression.charAt(i) - 65]++;
+	}
+	
+	//
+	public static void readVariablesValues(String infixExpression, int values[]) {
+		int variables[] = new int[26];
+		Arrays.fill(variables, 0);
+		checkVariables(infixExpression, variables);
+		for(int i=0;i<26;i++)
+			System.out.println(values[i] + " ");
+	}
+	
+	//method that receives a char and checks
+	//if it is an upper case letter.
+	//returns true if it is, returns false if it isn't
+	public static boolean isLetter(char check) { //check if the character is alphanumeric
+		return (check >= 65 && check <= 90);
+	}
+	
+	//method that receives a char and checks
+	//if it is an arithmetic operator.
+	//returns true if it is, returns false if it isn't
+	public static boolean isOperator(char check) { //check if the character is an operand
+		return check=='+'||check=='-'||check=='*'||check=='/'||check=='^';
+	}
+	
+	//method that receives a char as a parameter
+	//and checks it's priority.
+	//returns the corresponding priority as an int
+	public static int priorityCheck(char check) { //see the "priority level" of the character
+		switch (check) {
+			case '+':
+			case '-':
+				return 1;
+			case '*':
+			case '/':
+				return 2;
+			case '^':
+			    return 3;
+			default:
+			    return 0;
+		}
 	}
 	
 	//method that receives an String containing an
@@ -69,38 +118,6 @@ public class Program {
 		
 		System.out.print("\n");
 		return postfix;
-	}
-
-	//method that receives a char and checks
-	//if it is an upper case letter.
-	//returns true if it is, returns false if it isn't
-	public static boolean isLetter(char check) { //check if the character is alphanumeric
-		return (check >= 65 && check <= 90);
-	}
-	
-	//method that receives a char and checks
-	//if it is an arithmetic operator.
-	//returns true if it is, returns false if it isn't
-	public static boolean isOperator(char check) { //check if the character is an operand
-		return check=='+'||check=='-'||check=='*'||check=='/'||check=='^';
-	}
-	
-	//method that receives a char as a parameter
-	//and checks it's priority.
-	//returns the corresponding priority as an int
-	public static int priorityCheck(char check) { //see the "priority level" of the character
-		switch (check) {
-			case '+':
-			case '-':
-				return 1;
-			case '*':
-			case '/':
-				return 2;
-			case '^':
-			    return 3;
-			default:
-			    return 0;
-		}
 	}
 	
 	//method that receives a scanner object as a parameter,
@@ -163,9 +180,12 @@ public class Program {
 		Scanner sc = new Scanner(System.in);
 		
 		//declaring variables
-		String infix_expression = "";
-		String postfix_expression = "";
+		String infixExpression = "";
+		String postfixExpression = "";
 		int opt = 0;
+		
+		//creating arrays to store variables values
+		int values[] = new int[26];
 		
 		//loop to keep the menu running
 		while(opt != 5){
@@ -182,18 +202,19 @@ public class Program {
 			switch(opt) {
 				//read infix arithmetic expression
 				case 1:
-					infix_expression = writeExpression(sc);
+					infixExpression = writeExpression(sc);
 					break;
 					
 				//read values for the variables in the expression
 				case 2:
-					//[TODO]
+					readVariablesValues(infixExpression, values);
 					break;
 					
 				//converts the infix expression to a postfix expression
 				case 3:
 					//[TODO]
-					postfix_expression = convertInfixToPostfix(infix_expression); //[TODO]
+					sc.nextLine();
+					postfixExpression = convertInfixToPostfix(infixExpression); //[TODO]
 					break;
 					
 				//evaluate and give the result to the expression
