@@ -5,7 +5,7 @@
 //References:
 // - https://profkishimoto.github.io/edi03d-2024-1/atividades/n1/EDI-2024.1%20-%20Apl1.pdf
 // - https://www.calcont.in/Calculator/Postfix_calculator/
-// ASCII TABLE - https://www.ascii-code.com
+// - https://www.ascii-code.com
 // - https://www.baeldung.com/java-check-string-contains-only-letters-numbers
 
 package application;
@@ -40,7 +40,7 @@ public class Program {
 		int previousPriority = 0;
 	
 		for(int i=0;i<ie.length();i++) {
-			if(isAlphanumeric(ie.charAt(i))){
+			if(isLetter(ie.charAt(i))){
 				System.out.print(ie.charAt(i));
 			}
 			else if(isOperator(ie.charAt(i))) {
