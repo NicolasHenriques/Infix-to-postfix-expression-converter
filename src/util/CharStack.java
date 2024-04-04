@@ -1,6 +1,6 @@
 package util;
 
-public class Stack {
+public class CharStack {
 	//defining a constant for capacity
 	private final int STACK_CAPACITY = 256;
 	
@@ -9,12 +9,12 @@ public class Stack {
 	private int top;
 	
 	//constructors methods
-	public Stack () {
+	public CharStack () {
 		data = new char[STACK_CAPACITY];
 		top = 0;
 	}
 	
-	public Stack (int size) {
+	public CharStack (int size) {
 		data = new char[size];
 		top = 0;
 	}

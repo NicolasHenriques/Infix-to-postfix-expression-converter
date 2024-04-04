@@ -16,7 +16,8 @@ import java.util.Arrays;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-import util.Stack;
+import util.CharStack;
+import util.IntStack;
 
 public class Program {
 	//Method that receives no parameter and has
@@ -109,7 +110,7 @@ public class Program {
 	//and returns it in a String
 	public static String convertInfixToPostfix(String ie) {
 		//creating stack object
-		Stack postfixExpression = new Stack();
+		CharStack postfixExpression = new CharStack();
 	
 		//creating String variable that will be returned
 		String postfix = "";
@@ -168,7 +169,7 @@ public class Program {
 	//and checks if the expression in the string is valid.
 	//Returns true if the expression is valid and false if it isn't
 	public static boolean verifyInput(String expression){
-		Stack s = new Stack(64);
+		CharStack s = new CharStack(64);
 		char currentChar;
 		boolean controlVariable = false; //true - last char was a letter // false - last char was an operator
 		for (int i = 0 ; i < expression.length() ; i++) {
@@ -196,6 +197,26 @@ public class Program {
 			}
 		}
 		return s.isEmpty();
+	}
+	
+	//
+	public static int postfixResult(String infixExpression, int values[]) {
+		int result = 0;
+		IntStack s = new IntStack(8);
+		
+		for(int i=0;i<infixExpression.length();i++) {
+			char currentChar = infixExpression.charAt(i);
+			if(isLetter(currentChar))
+				s.push((values[currentChar-65]));
+		}
+		
+		return result;
+	}
+	
+	//
+	public static void postfixEvaluation(String infixExpression, int values[]) {
+		int result = 0;
+		
 	}
 
 	
@@ -245,11 +266,11 @@ public class Program {
 				//evaluate and give the result to the expression
 				case 4:
 					//[TODO]
+					postfixEvaluation(postfixExpression, values);
 					break;
 					
 				//exit
 				case 5:
-					//[TODO]
 					break;
 					
 				//default option that checks for invalid numbers
