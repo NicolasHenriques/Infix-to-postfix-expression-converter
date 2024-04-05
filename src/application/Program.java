@@ -84,7 +84,7 @@ public class Program {
 	//Method that receives a scanner object, a String containing the
 	//infix expression and an integer array to store the variables' values 
 	//as parameters. This method doesn't return anything
-	public static void readVariablesValues(Scanner sc, String infixExpression, int values[]) {
+	public static void readVariablesValues(Scanner sc, String infixExpression, float values[]) {
 		//creating an array to store what variables were used
 		int variables[] = new int[26];
 		Arrays.fill(variables, 0);
@@ -92,12 +92,22 @@ public class Program {
 		boolean hasVariables = false;
 		hasVariables = checkVariables(infixExpression, variables);
 		
+		boolean input = false;
+		
 		if(hasVariables) {
 			for(int i=0;i<26;i++) {
 				if(variables[i] != 0) {
-					System.out.print("Enter the value for " + (char)(i+65) + ": ");
-					//[TODO] handle type mismatch exception
-					values[i] = sc.nextInt();
+					input = false;
+					while(!input) {
+						System.out.print("Enter the value for " + (char)(i+65) + ": ");
+						try {
+							values[i] = sc.nextFloat();
+							input = true;
+						} catch(InputMismatchException e) {
+							System.out.println("Invalid input!");
+							sc.nextLine();
+						}
+					}
 				}
 			}
 		}
@@ -152,7 +162,7 @@ public class Program {
 		sc.nextLine();
 		String exp = "";
 		while(true) {
-			System.out.println("Type the expression (use only letters and operators. No spaces): ");
+			System.out.print("Type the expression (use only letters and operators. No spaces): ");
 			exp = sc.nextLine();
 			boolean verify = verifyInput(exp);
 			if(!verify) {
@@ -223,7 +233,7 @@ public class Program {
 	}
 	
 	//
-	public static float postfixResult(String postfixExpression, int values[]) {
+	public static float postfixResult(String postfixExpression, float values[]) {
 		float result = 0;
 		FloatStack s = new FloatStack(8);
 		
@@ -240,7 +250,6 @@ public class Program {
 				firstValue = s.pop();
 				char operator = currentChar;
 				float partialResult = calculateOperation(firstValue, secondValue, operator);
-				System.out.println(partialResult);
 				s.push(partialResult);
 			}
 		}
@@ -249,7 +258,7 @@ public class Program {
 	}
 	
 	//
-	public static void postfixEvaluation(String infixExpression, int values[]) {
+	public static void postfixEvaluation(String infixExpression, float values[]) {
 		float result = 0;
 		result = postfixResult(infixExpression, values);
 		System.out.println("Expression result: " + result);
@@ -269,7 +278,7 @@ public class Program {
 		int opt = 0;
 		
 		//creating arrays to store variables values
-		int values[] = new int[26];
+		float values[] = new float[26];
 		
 		//loop to keep the menu running
 		while(opt != 5){
@@ -299,10 +308,9 @@ public class Program {
 					
 				//converts the infix expression to a postfix expression
 				case 3:
-					//[TODO]
 					if(expressionAdded) {
 						sc.nextLine();
-						postfixExpression = convertInfixToPostfix(infixExpression); //[TODO]
+						postfixExpression = convertInfixToPostfix(infixExpression);
 						System.out.println(postfixExpression);
 						expressionChecked = true;
 					}
@@ -314,7 +322,6 @@ public class Program {
 					
 				//evaluate and give the result to the expression
 				case 4:
-					//[TODO]
 					if(expressionAdded && expressionChecked) {
 						postfixEvaluation(postfixExpression, values);
 					}
