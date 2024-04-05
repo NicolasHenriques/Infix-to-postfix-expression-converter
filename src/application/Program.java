@@ -1,4 +1,4 @@
-//Code made by:
+		//Code made by:
 // - Marco Antonio de Camargo      | RA: 10418309
 // - Natan Moreira Passos          | RA: 10417916
 // - Nicolas Henriques de Almeida  | RA: 10418357
@@ -120,12 +120,12 @@ public class Program {
 	
 		for(int i=0;i<ie.length();i++) {
 			if(isLetter(ie.charAt(i))){
-				System.out.print(ie.charAt(i));
+				postfix += ie.charAt(i);
 			}
 			else if(isOperator(ie.charAt(i))) {
 				previousPriority = priorityCheck(postfixExpression.top()); //if an operand is found. Check if its priority is less/equal than the previous
 				if(previousPriority >= priorityCheck(ie.charAt(i))){ //if it is, pop the last one from the stack and push the new one. If it isn't, just add the new one to the stack
-					System.out.print(postfixExpression.pop());
+					postfix += postfixExpression.pop();
 				}
 				postfixExpression.push(ie.charAt(i));
 			}
@@ -134,16 +134,14 @@ public class Program {
 			}
 			else if(ie.charAt(i) == ')') { //if an ) is found, pop everything until you find a (
 				while(!postfixExpression.isEmpty() && postfixExpression.top() != '(') {
-					System.out.print(postfixExpression.pop());
+					postfix += postfixExpression.pop();
 				}
 				postfixExpression.pop(); 
 			}
 		}
 		while(!postfixExpression.isEmpty()) { //pop the remaining elements of the stack
-			System.out.print(postfixExpression.pop());
+			postfix += postfixExpression.pop();
 		}
-		
-		System.out.print("\n");
 		return postfix;
 	}
 	
@@ -154,7 +152,7 @@ public class Program {
 		sc.nextLine();
 		String exp = "";
 		while(true) {
-			System.out.println("Type the expression: ");
+			System.out.println("Type the expression (use only letters and operators. No spaces): ");
 			exp = sc.nextLine();
 			boolean verify = verifyInput(exp);
 			if(!verify) {
@@ -299,6 +297,7 @@ public class Program {
 					//[TODO]
 					sc.nextLine();
 					postfixExpression = convertInfixToPostfix(infixExpression); //[TODO]
+					System.out.println(postfixExpression);
 					break;
 					
 				//evaluate and give the result to the expression
