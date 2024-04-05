@@ -260,6 +260,8 @@ public class Program {
 	public static void main(String[] args) {
 		//creating objects
 		Scanner sc = new Scanner(System.in);
+		boolean expressionAdded = false;
+		boolean expressionChecked = false;
 		
 		//declaring variables
 		String infixExpression = "";
@@ -285,6 +287,9 @@ public class Program {
 				//read infix arithmetic expression
 				case 1:
 					infixExpression = writeExpression(sc);
+					//booleans to check if the user added an expression and converted it
+					expressionAdded = true;
+					expressionChecked = false;
 					break;
 					
 				//read values for the variables in the expression
@@ -295,15 +300,27 @@ public class Program {
 				//converts the infix expression to a postfix expression
 				case 3:
 					//[TODO]
-					sc.nextLine();
-					postfixExpression = convertInfixToPostfix(infixExpression); //[TODO]
-					System.out.println(postfixExpression);
+					if(expressionAdded) {
+						sc.nextLine();
+						postfixExpression = convertInfixToPostfix(infixExpression); //[TODO]
+						System.out.println(postfixExpression);
+						expressionChecked = true;
+					}
+					else {
+						System.out.println("Missing expression to convert");
+					}
+
 					break;
 					
 				//evaluate and give the result to the expression
 				case 4:
 					//[TODO]
-					postfixEvaluation(postfixExpression, values);
+					if(expressionAdded && expressionChecked) {
+						postfixEvaluation(postfixExpression, values);
+					}
+					else {
+						System.out.println("You still need to add an expression or convert it to postfix");
+					}
 					break;
 					
 				//exit
