@@ -234,7 +234,6 @@ public class Program {
 	
 	//
 	public static float postfixResult(String postfixExpression, float values[]) {
-		float result = 0;
 		FloatStack s = new FloatStack(8);
 		
 		float firstValue, secondValue;
