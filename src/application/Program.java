@@ -208,6 +208,9 @@ public class Program {
 		return s.isEmpty();
 	}
 	
+	//Method that receives two float values and a char
+	//containing an arithmetic operator.
+	//This method returns the result of the operation between the two values.
 	public static float calculateOperation(float firstValue, float secondValue, char operator) {
 		float result = 0;
 		
@@ -232,7 +235,9 @@ public class Program {
 		return result;
 	}
 	
-	//
+	//Method that receives a String containing the postfix
+	//expression and an array containing the values of the variables.
+	//This method calculates and returns the result of the expression.
 	public static float postfixResult(String postfixExpression, float values[]) {
 		FloatStack s = new FloatStack(8);
 		
@@ -256,7 +261,9 @@ public class Program {
 		return s.pop();
 	}
 	
-	//
+	//Method that receives a String containing the postfix
+	//expression and an array containing the values of the variables.
+	//This method returns nothing.
 	public static void postfixEvaluation(String postfixExpression, float values[]) {
 		float result = 0;
 		result = postfixResult(postfixExpression, values);
