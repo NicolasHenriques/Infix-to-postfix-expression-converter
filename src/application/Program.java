@@ -1,4 +1,4 @@
-		//Code made by:
+//Code made by:
 // - Marco Antonio de Camargo      | RA: 10418309
 // - Natan Moreira Passos          | RA: 10417916
 // - Nicolas Henriques de Almeida  | RA: 10418357
@@ -258,10 +258,18 @@ public class Program {
 	}
 	
 	//
-	public static void postfixEvaluation(String infixExpression, float values[]) {
+	public static void postfixEvaluation(String postfixExpression, float values[]) {
 		float result = 0;
-		result = postfixResult(infixExpression, values);
-		System.out.println("Expression result: " + result);
+		result = postfixResult(postfixExpression, values);
+		System.out.println(postfixExpression);
+		for(int i=0;i<postfixExpression.length();i++) {
+			char currChar = postfixExpression.charAt(i);
+			if(isLetter(currChar))
+				System.out.print(values[currChar-65] + " ");
+			else
+				System.out.print(currChar + " ");
+		}
+		System.out.println("\nExpression result: " + result);
 	}
 
 	
