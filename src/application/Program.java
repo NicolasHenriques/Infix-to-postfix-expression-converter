@@ -70,11 +70,11 @@ public class Program {
 	//Method that receives a String containing an infix expresssion
 	//and an integer array to store which variables were used.
 	//Returns true if the expression has variables and false if not.
-	public static boolean checkVariables(String infixExpression, int variables[]) {
+	public static boolean checkVariables(String infixExpression, boolean variables[]) {
 		boolean hasVariables = false;
 		for(int i=0;i<infixExpression.length();i++) 
 			if(isLetter(infixExpression.charAt(i))) {
-				variables[infixExpression.charAt(i) - 65] = 1;
+				variables[infixExpression.charAt(i) - 65] = true;
 				hasVariables = true;
 			}
 		
@@ -82,12 +82,12 @@ public class Program {
 	}
 	
 	//Method that receives a scanner object, a String containing the
-	//infix expression and an integer array to store the variables' values 
+	//infix expression and an float array to store the variables' values 
 	//as parameters. This method doesn't return anything
 	public static void readVariablesValues(Scanner sc, String infixExpression, float values[]) {
 		//creating an array to store what variables were used
-		int variables[] = new int[26];
-		Arrays.fill(variables, 0);
+		boolean variables[] = new boolean[26];
+		Arrays.fill(variables, false);
 		
 		boolean hasVariables = false;
 		hasVariables = checkVariables(infixExpression, variables);
@@ -96,7 +96,7 @@ public class Program {
 		
 		if(hasVariables) {
 			for(int i=0;i<26;i++) {
-				if(variables[i] != 0) {
+				if(variables[i]) {
 					input = false;
 					while(!input) {
 						System.out.print("Enter the value for " + (char)(i+65) + ": ");
